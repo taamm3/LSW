@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Shop : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TextMeshProUGUI _enterText;
+
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        _enterText.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        
+        _enterText.gameObject.SetActive(false);
+    }
+
+    public bool CanEnter()
+    {
+        return _enterText.gameObject.activeInHierarchy;
     }
 }
