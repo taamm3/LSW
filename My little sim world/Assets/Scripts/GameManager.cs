@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public Player Player;
     public Shop Shop;
     public UIManager UIManager;
+    public Inventory Inventory;
 
     private void Awake()
     {

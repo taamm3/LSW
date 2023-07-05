@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5423074ea573a284f83faefe6d74cdbf, type: 3}
+  m_Name: Outfit 1
+  m_EditorClassIdentifier: 
+  index: 1
+  Clothes: {fileID: 1595623275894781526, guid: ceac64035daa2204b9ec1bf6bcbc026e, type: 3}
+  icon: {fileID: 21300000, guid: 7828cb7c428f08e4e9b2dea4e9a16cdc, type: 3}
+  price: 100
+  count: 1
+  instance: {fileID: 0}
+  inventoryItem: {fileID: 0}

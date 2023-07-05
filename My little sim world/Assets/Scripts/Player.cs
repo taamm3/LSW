@@ -6,32 +6,17 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 10f;
     [SerializeField] private Rigidbody2D _rigidbody;
     public InputAction enterShopAction;
+    public InputAction openInventoryAction;
     public int Coins = 250;
-    public int OutfitNumber = 0;
     private bool CanMove = true;
-    Vector3 startScale;
+    Vector3 _startScale;
     
-    private Vector2 screenBounds;
-    private float objectWidth;
-    private float objectHeight;
 
     void Start()
     {
-        startScale = transform.localScale;
+        _startScale = transform.localScale;
         SubscribeToEvents();
-        
-        //screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        //objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
-        //objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y; //extents = size of height / 2
     }
-
-    //void LateUpdate()
-    //{
-    //    Vector3 viewPos = transform.position;
-    //    viewPos.x = Mathf.Clamp(viewPos.x, screenBounds.x + objectWidth, screenBounds.x * -1 - objectWidth);
-    //    viewPos.y = Mathf.Clamp(viewPos.y, screenBounds.y + objectHeight, screenBounds.y * -1 - objectHeight);
-    //    transform.position = viewPos;
-    //}
 
     void FixedUpdate()
     {
@@ -50,12 +35,16 @@ public class Player : MonoBehaviour
     {
         enterShopAction.Enable();
         enterShopAction.performed += EnterShop;
+        openInventoryAction.Enable();
+        openInventoryAction.performed += OpenInventory;
     }
 
     private void UnsubscribeFromEvents()
     {
         enterShopAction.performed -= EnterShop;
         enterShopAction.Disable();
+        openInventoryAction.performed -= OpenInventory;
+        openInventoryAction.Disable();
     }
 
     private void EnterShop(InputAction.CallbackContext obj)
@@ -63,7 +52,15 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.Shop.CanEnter())
         {
             SetCanMove(false);
-            GameManager.Instance.UIManager.OpenUI();
+            GameManager.Instance.UIManager.OpenShopUI();
+        }
+    }
+
+    private void OpenInventory(InputAction.CallbackContext obj)
+    {
+        if (CanMove)
+        {
+            GameManager.Instance.UIManager.OpenInventoryUI();
         }
     }
 
@@ -81,7 +78,7 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.left * _speed * Time.deltaTime;
-            transform.localScale = new Vector3(-startScale.x, startScale.y, startScale.z);
+            transform.localScale = new Vector3(-_startScale.x, _startScale.y, _startScale.z);
         }
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
@@ -90,7 +87,12 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * _speed * Time.deltaTime;
-            transform.localScale = startScale;
+            transform.localScale = _startScale;
         }
+    }
+
+    public void Pay(int price)
+    {
+        Coins -= price;
     }
 }

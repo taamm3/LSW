@@ -1,15 +1,21 @@
+using System;
 using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _playerCoinsText;
+    [SerializeField] private GameObject _inventoryCanvas;
 
 
     private void OnEnable()
     {
+        UpdateCoins();
+    }
+
+    public void UpdateCoins()
+    {
         _playerCoinsText.text = GameManager.Instance.Player.Coins.ToString();
-        //Instantiate(GetOutfitByNumber());
     }
 
     public void BackClicked()
@@ -18,8 +24,13 @@ public class UIManager : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    internal void OpenUI()
+    public void OpenShopUI()
     {
         gameObject.SetActive(true);
+    }
+
+    public void OpenInventoryUI()
+    {
+        _inventoryCanvas.SetActive(!_inventoryCanvas.activeInHierarchy);
     }
 }
