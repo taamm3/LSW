@@ -25,7 +25,9 @@ Each outfit in the game has a corresponding scriptable object that contains the 
 * Price: The cost of the outfit in in-game coins.
 * Instance: An instance of the outfit prefab.
 * Count: The number of instances of the outfit owned by the player.
-* Inventory item: The instance of the item to be shown in the inventory. 
+* Inventory item: The instance of the item to be shown in the inventory.
+## Known Issue:
+The game currently has a known issue where the scrollbar in the inventory does not scroll down when the player owns a large number of outfits. This prevents the player from viewing and selecting lower items in the inventory. This issue was not resolved within the 48-hour development timeframe and requires further attention to ensure proper functionality. 
 ## Development Details:
 * Unity Version: The game was developed using Unity version 2021.3.16f1.
 * Development Time: The entire game was developed in a span of 48 hours.
